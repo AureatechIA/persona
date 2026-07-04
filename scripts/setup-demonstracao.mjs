@@ -133,7 +133,15 @@ const baseModel = {
   video_strategy: 'name_sync',
   greeting_template: 'Obrigado pela sua mensagem, {nome}!',
   theme_intro_seconds: 2.8,
-  lipsync_config: { model: 'lipsync-2-pro', sync_mode: 'loop', temperature: 0.3 },
+  lipsync_config: {
+    model: 'lipsync-2-pro',
+    sync_mode: 'loop',
+    temperature: 0.3,
+    // Trilha instrumental contínua sob o vídeo todo (corpo + closing),
+    // mesmo padrão do ricardomarques. O closing (silencioso) fica coberto
+    // pelo bed, que faz fade-out no final.
+    full_music: { path: 'assets/closing_music.mp3', volume: 0.08 },
+  },
   closing_video_path: 'assets/closing_demonstracao.mp4',
   // 'none' mantém o áudio original do closing (silêncio) — sem trilha do PL.
   closing_music_path: 'none',
