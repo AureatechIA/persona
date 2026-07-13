@@ -711,7 +711,9 @@ def process_selfie(selfie: dict):
 
         try:
             if provider == "meta":
-                _msg_id, _sender_id = send_video_official(selfie["phone"], video_signed)
+                _msg_id, _sender_id = send_video_official(
+                    selfie["phone"], video_signed, name=display_first_name,
+                )
                 provider_used = "official"
             else:
                 send_whatsapp(

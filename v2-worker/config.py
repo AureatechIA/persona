@@ -38,6 +38,13 @@ WHATSAPP_PHONE_NUMBER_IDS = [p.strip() for p in _phone_ids_raw.split(",") if p.s
 WHATSAPP_VIDEO_TEMPLATE = os.getenv("WHATSAPP_VIDEO_TEMPLATE", "videochamadapl")
 WHATSAPP_VIDEO_TEMPLATE_LANG = os.getenv("WHATSAPP_VIDEO_TEMPLATE_LANG", "pt_BR")
 
+# Nome do parâmetro nomeado de texto no BODY do template (ex: "nome" para um
+# body com {{nome}}). Vazio = template sem variável no body (comportamento
+# antigo) — o worker não envia componente body. Setar junto com a troca do
+# WHATSAPP_VIDEO_TEMPLATE para um template que tenha a variável, senão a Meta
+# rejeita o envio por contagem de parâmetros (erro 132000).
+WHATSAPP_VIDEO_TEMPLATE_NAME_PARAM = os.getenv("WHATSAPP_VIDEO_TEMPLATE_NAME_PARAM", "").strip()
+
 # Worker settings
 POLL_INTERVAL = int(os.getenv("WORKER_POLL_INTERVAL", "3"))
 MAX_RETRIES = int(os.getenv("WORKER_MAX_RETRIES", "3"))
