@@ -12,6 +12,7 @@ from config import (
     WHATSAPP_ACCESS_TOKEN,
     WHATSAPP_VIDEO_TEMPLATE,
     WHATSAPP_VIDEO_TEMPLATE_LANG,
+    WHATSAPP_VIDEO_TEMPLATE_NAME_PARAM,
     WHATSAPP_META_WEIGHT,
     WHATSAPP_UAZAPI_WEIGHT,
 )
@@ -52,13 +53,40 @@ def pick_provider() -> str:
     return random.choices(["meta", "uazapi"], weights=[meta, uazapi])[0]
 
 
-def send_video_official(phone: str, video_url: str) -> tuple[str, str]:
+def send_video_official(phone: str, video_url: str, name: str | None = None) -> tuple[str, str]:
     """Send video via WhatsApp Business Cloud API."""
     if not _official_enabled():
         raise WhatsAppSendError("Cloud API não configurada")
 
     phone = _normalize_phone(phone)
     phone_number_id = random.choice(WHATSAPP_PHONE_NUMBER_IDS)
+
+    components = [
+        {
+            "type": "header",
+            "parameters": [
+                {
+                    "type": "video",
+                    "parameter_name": "video_header",
+                    "video": {"link": video_url},
+                }
+            ],
+        }
+    ]
+
+    # Body com variável nomeada (ex: {{nome}}) — só quando o template ativo
+    # tem a variável. Parâmetro vazio derruba o envio na Meta, daí o fallback.
+    if WHATSAPP_VIDEO_TEMPLATE_NAME_PARAM:
+        components.append({
+            "type": "body",
+            "parameters": [
+                {
+                    "type": "text",
+                    "parameter_name": WHATSAPP_VIDEO_TEMPLATE_NAME_PARAM,
+                    "text": (name or "").strip() or "amigo(a)",
+                }
+            ],
+        })
 
     payload = {
         "messaging_product": "whatsapp",
@@ -67,18 +95,7 @@ def send_video_official(phone: str, video_url: str) -> tuple[str, str]:
         "template": {
             "name": WHATSAPP_VIDEO_TEMPLATE,
             "language": {"code": WHATSAPP_VIDEO_TEMPLATE_LANG},
-            "components": [
-                {
-                    "type": "header",
-                    "parameters": [
-                        {
-                            "type": "video",
-                            "parameter_name": "video_header",
-                            "video": {"link": video_url},
-                        }
-                    ],
-                }
-            ],
+            "components": components,
         },
     }
 
