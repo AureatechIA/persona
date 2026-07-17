@@ -4,7 +4,7 @@ const TITLE = 'Grave seu depoimento | Votia';
 const DESCRIPTION =
   'Grave um vídeo curto e receba uma resposta personalizada em vídeo no seu WhatsApp.';
 const FAVICON_URL =
-  'https://sobfplitrzgggzqsycew.supabase.co/storage/v1/object/public/avatars/logo-votia%20(1).png';
+  'https://sobfplitrzgggzqsycew.supabase.co/storage/v1/object/public/avatars/logo-votia%20(2).png';
 
 // Override COMPLETO da metadata do layout raiz (que é do PL) — a demo é
 // white label: título absoluto (fora do template "| PL") + OG/Twitter próprios.
