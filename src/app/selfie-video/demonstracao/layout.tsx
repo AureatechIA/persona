@@ -3,12 +3,19 @@ import type { Metadata } from 'next';
 const TITLE = 'Grave seu depoimento | Votia';
 const DESCRIPTION =
   'Grave um vídeo curto e receba uma resposta personalizada em vídeo no seu WhatsApp.';
+const FAVICON_URL =
+  'https://sobfplitrzgggzqsycew.supabase.co/storage/v1/object/public/avatars/logo-votia.png';
 
 // Override COMPLETO da metadata do layout raiz (que é do PL) — a demo é
 // white label: título absoluto (fora do template "| PL") + OG/Twitter próprios.
+// Declarar `icons` aqui suprime o favicon.ico/icon.png da raiz nesta rota.
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
+  icons: {
+    icon: FAVICON_URL,
+    apple: FAVICON_URL,
+  },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,

@@ -22,6 +22,15 @@ export const metadata: Metadata = {
     template: '%s | PL - Partido Liberal',
   },
   description: 'Grave seu depoimento e receba uma resposta personalizada do PL - Partido Liberal.',
+  // Ícones via config (não por convenção de arquivo em src/app) para que rotas
+  // white-label possam substituir o campo `icons` inteiro no próprio layout.
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+    ],
+    apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
+  },
   openGraph: {
     title: 'PL - Partido Liberal',
     description: 'Grave seu depoimento e receba uma resposta personalizada do PL - Partido Liberal.',
