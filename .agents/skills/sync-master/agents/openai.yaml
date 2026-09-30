@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sincronizar com a principal"
+  short_description: "Detecta a branch principal de origin e preserva seu trabalho"
+  default_prompt: "Use $sync-master para detectar a branch principal de origin, incorporá-la à branch atual preservando meu trabalho e resolver conflitos óbvios; investigue os demais antes de pedir minha confirmação."
